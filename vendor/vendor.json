@@ -123,6 +123,14 @@
 			"revisionTime": "2017-12-18T18:29:11Z"
 		},
 		{
+			"checksumSHA1": "ObyfDT2+BKpMr6K8v420AAyy70s=",
+			"path": "github.com/netvote/elections-solidity/protocol",
+			"revision": "b96470ab365639b73b0cf77838eec3e9adc1a509",
+			"revisionTime": "2018-02-06T21:37:38Z",
+			"version": "v1.0.4",
+			"versionExact": "v1.0.4"
+		},
+		{
 			"checksumSHA1": "omplhuY7lM3oT4BFfoWh4uegLS0=",
 			"path": "github.com/opentracing/opentracing-go",
 			"revision": "db37fa5964ade72399b2ac8201123b8623256d75",
