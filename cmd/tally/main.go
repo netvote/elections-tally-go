@@ -52,6 +52,9 @@ func main() {
 	electionType, err := election.ElectionType(nil)
 	noError("error getting type", err)
 
+	d, err := decoder.NewDecoder(key)
+	noError("error getting decoder", err)
+
 	switch electionType {
 	case "BASIC":
 
@@ -66,12 +69,11 @@ func main() {
 		for i := int64(0); i < voterCount.Int64(); i++ {
 			votePayload, err := election.GetVoteAt(nil, big.NewInt(i))
 			noError("error getting vote", err)
-			log.Infof("vote=%s", votePayload)
-			_, err = decoder.DecodeVote(key, votePayload)
+			log.Infof("encrypted vote=%s", votePayload)
+			_, err = d.DecodeVote(key, votePayload)
 			noError("error getting vote", err)
 		}
 
-		log.Info("Basic")
 	case "TIERED":
 		log.Info("Tiered")
 	default:

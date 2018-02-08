@@ -14,7 +14,21 @@ import (
 )
 
 type Decoder struct {
-	key string
+	block cipher.Block
+	iv []byte
+}
+
+func NewDecoder(key string) (*Decoder, error) {
+	hashKey, iv := genIvAndKey([]byte{}, []byte(key), md5.New(), 32, 1)
+	block, err := aes.NewCipher([]byte(hashKey))
+	if err != nil {
+		return &Decoder{}, err
+	}
+
+	return &Decoder{
+		block: block,
+		iv: iv,
+	}, nil
 }
 
 func addBase64Padding(value string) string {
@@ -41,30 +55,23 @@ func genIvAndKey(salt, data []byte, h hash.Hash, keyLen, blockLen int) (key []by
 	return res[:keyLen], res[keyLen:]
 }
 
-func DecodeVote(key string, payload string) (protocol.Vote, error){
-	logrus.Debugf("encrypted size=%d", len(payload))
-	decodedMsg, err := base64.StdEncoding.DecodeString(addBase64Padding(payload))
-
-	if err != nil {
-		return protocol.Vote{}, err
-	}
-	logrus.Debugf("size=%d, msg=%s", len(decodedMsg), decodedMsg)
-	msgBytes := []byte(decodedMsg)
-
-	hashKey, iv := genIvAndKey([]byte{}, []byte(key), md5.New(), 32, 1)
-	block, err := aes.NewCipher([]byte(hashKey))
-	if err != nil {
-		return protocol.Vote{}, err
-	}
-	mode := cipher.NewCBCDecrypter(block, iv)
-
-	mode.CryptBlocks(msgBytes, msgBytes)
-
+func (d *Decoder) DecodeVote(key string, payload string) (protocol.Vote, error){
 	var vote protocol.Vote
 
-	padding := len(msgBytes) - int(msgBytes[len(msgBytes)-1])
+	//base64 -> utf8
+	decodedMsg, err := base64.StdEncoding.DecodeString(addBase64Padding(payload))
+	if err != nil {
+		return protocol.Vote{}, err
+	}
 
-	err = proto.Unmarshal(msgBytes[:padding], &vote)
+	//decrypt
+	msgBytes := []byte(decodedMsg)
+	mode := cipher.NewCBCDecrypter(d.block, d.iv)
+	mode.CryptBlocks(msgBytes, msgBytes)
+
+	// decode proto
+	protoBytes := trimPadding(msgBytes)
+	err = proto.Unmarshal(protoBytes, &vote)
 	if err != nil {
 		return protocol.Vote{}, err
 	}
@@ -73,4 +80,9 @@ func DecodeVote(key string, payload string) (protocol.Vote, error){
 	logrus.Infof("VOTE=%s", string(b))
 
 	return vote, nil
+}
+
+func trimPadding(msg []byte)([]byte){
+	padding := len(msg) - int(msg[len(msg)-1])
+	return msg[:padding]
 }
