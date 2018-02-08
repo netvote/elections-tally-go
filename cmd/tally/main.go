@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/netvote/elections-tally-go/contracts"
+	"github.com/netvote/elections-tally-go/decoder"
 	"os"
 	log "github.com/sirupsen/logrus"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -45,6 +46,9 @@ func main() {
 		os.Exit(1)
 	}
 
+
+	noError("error creating decoder", err)
+
 	electionType, err := election.ElectionType(nil)
 	noError("error getting type", err)
 
@@ -60,9 +64,11 @@ func main() {
 		}
 
 		for i := int64(0); i < voterCount.Int64(); i++ {
-			vote, err := election.GetVoteAt(nil, big.NewInt(i))
+			votePayload, err := election.GetVoteAt(nil, big.NewInt(i))
 			noError("error getting vote", err)
-			log.Infof("vote=%s", vote)
+			log.Infof("vote=%s", votePayload)
+			_, err = decoder.DecodeVote(key, votePayload)
+			noError("error getting vote", err)
 		}
 
 		log.Info("Basic")

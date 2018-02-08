@@ -1,4 +1,4 @@
-.PHONY: contracts
+.PHONY: contracts, protocol
 
 contracts:
 	npm install
@@ -17,3 +17,10 @@ endef
 
 build:
 	go build cmd/tally/main.go
+
+protocol:
+	protoc --go_out=:./protocol -I. -I./vendor/github.com/netvote/elections-solidity/protocol ./vendor/github.com/netvote/elections-solidity/protocol/*.proto
+	mv protocol/vendor/github.com/netvote/elections-solidity/protocol/*.go protocol/
+	rm -rf protocol/vendor
+	sed -i.bak 's/package netvote/package protocol/g' protocol/*.go
+	rm protocol/*.bak
