@@ -69,7 +69,7 @@ func main() {
 		for i := int64(0); i < voterCount.Int64(); i++ {
 			votePayload, err := election.GetVoteAt(nil, big.NewInt(i))
 			noError("error getting vote", err)
-			log.Infof("encrypted vote=%s", votePayload)
+			log.Debugf("encrypted vote=%s", votePayload)
 			_, err = d.DecodeVote(key, votePayload)
 			noError("error getting vote", err)
 		}
