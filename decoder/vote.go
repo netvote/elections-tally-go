@@ -4,12 +4,10 @@ import (
 	"crypto/cipher"
 	"crypto/aes"
 	"github.com/netvote/elections-tally-go/protocol"
-	"github.com/sirupsen/logrus"
 	"encoding/base64"
 	"strings"
 	"hash"
 	"github.com/golang/protobuf/proto"
-	"encoding/json"
 	"crypto/md5"
 )
 
@@ -75,9 +73,6 @@ func (d *Decoder) DecodeVote(payload string) (protocol.Vote, error){
 	if err != nil {
 		return protocol.Vote{}, err
 	}
-
-	b, _ := json.Marshal(vote)
-	logrus.Infof("VOTE=%s", string(b))
 
 	return vote, nil
 }

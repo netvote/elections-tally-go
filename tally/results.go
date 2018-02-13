@@ -1,7 +1,6 @@
 package tally
 
 import (
-	"github.com/sirupsen/logrus"
 	"github.com/netvote/elections-tally-go/storage"
 	"encoding/json"
 )
@@ -37,7 +36,6 @@ func (r TallyResults) MergeSum(vote TallyResults){
 			}
 		}
 	}
-	logrus.Info("result: %t", r)
 }
 
 
