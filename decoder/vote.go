@@ -55,7 +55,7 @@ func genIvAndKey(salt, data []byte, h hash.Hash, keyLen, blockLen int) (key []by
 	return res[:keyLen], res[keyLen:]
 }
 
-func (d *Decoder) DecodeVote(key string, payload string) (protocol.Vote, error){
+func (d *Decoder) DecodeVote(payload string) (protocol.Vote, error){
 	var vote protocol.Vote
 
 	//base64 -> utf8

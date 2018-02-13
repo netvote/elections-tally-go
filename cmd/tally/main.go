@@ -3,12 +3,14 @@ package main
 import (
 	"github.com/netvote/elections-tally-go/contracts"
 	"github.com/netvote/elections-tally-go/decoder"
+	"github.com/netvote/elections-tally-go/storage"
+	"github.com/netvote/elections-tally-go/tally"
 	"os"
 	log "github.com/sirupsen/logrus"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/common"
 	"flag"
-	"math/big"
+	"sync"
 )
 
 func main() {
@@ -29,13 +31,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	log.Infof("Tallying election=%s", *address)
-
 	// get encryption key
 	conn, err := ethclient.Dial("https://"+network+".infura.io")
 	noError("error getting ethclient", err)
 
-	election, err := contracts.NewBasicElection(common.HexToAddress(*address), conn)
+	election, err := contracts.NewBaseElection(common.HexToAddress(*address), conn)
 	noError("error getting election", err)
 
 	key, err := election.PrivateKey(nil)
@@ -46,7 +46,6 @@ func main() {
 		os.Exit(1)
 	}
 
-
 	noError("error creating decoder", err)
 
 	electionType, err := election.ElectionType(nil)
@@ -55,32 +54,62 @@ func main() {
 	d, err := decoder.NewDecoder(key)
 	noError("error getting decoder", err)
 
+	storage.InitShell()
+
 	switch electionType {
 	case "BASIC":
+		noError("error getting election", err)
 
-		voterCount, err := election.GetVoteCount(nil)
-		noError("error getting count", err)
+		result, err := tally.TallyPool(*address, d, conn)
+		noError("error tallying pool", err)
 
-		if voterCount.Uint64() == 0 {
-			log.Info("There are no votes for this election")
-			os.Exit(0)
-		}
-
-		for i := int64(0); i < voterCount.Int64(); i++ {
-			votePayload, err := election.GetVoteAt(nil, big.NewInt(i))
-			noError("error getting vote", err)
-			log.Debugf("encrypted vote=%s", votePayload)
-			_, err = d.DecodeVote(key, votePayload)
-			noError("error getting vote", err)
-		}
+		log.Infof("%s", result.Json())
 
 	case "TIERED":
+		tiered, err := contracts.NewTieredElection(common.HexToAddress(*address), conn)
+		noError("error getting election", err)
+
+		poolCnt, err := tiered.GetPoolCount(nil)
+		noError("error getting pool count", err)
+
+		var wg sync.WaitGroup
+		wg.Add(int(poolCnt.Int64()))
+		tallyChan := make(chan tally.TallyResults, 10)
+
+		for i := int64(0); i<poolCnt.Int64(); i++ {
+			go func() {
+				result, err := tally.TallyPool(*address, d, conn)
+				noError("error tallying pool", err)
+				tallyChan <- result
+			}()
+		}
+
+		var result tally.TallyResults
+		go func() {
+			first := true
+			for vote := range tallyChan {
+				go func() {
+					defer wg.Done()
+					if first {
+						first = false
+						result = vote
+					}else{
+						result.MergeSum(vote)
+					}
+				}()
+			}
+		}()
+
+		wg.Wait()
+		close(tallyChan)
+		log.Infof("%s", result.Json())
+
+
 		log.Info("Tiered")
 	default:
 		log.Errorf("Unrecognized election type: %s", electionType)
 		os.Exit(1)
 	}
-
 
 }
 

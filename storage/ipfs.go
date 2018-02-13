@@ -3,12 +3,12 @@ package storage
 import (
 	ipfs "github.com/ipfs/go-ipfs-api"
 	"encoding/json"
-	"github.com/sirupsen/logrus"
 	"strings"
 )
 
 var (
 	shell *ipfs.Shell
+	cache = make(map[string]*Ballot)
 )
 
 type Choice struct {
@@ -35,6 +35,10 @@ func InitShell(){
 }
 
 func GetIpfsBallot(ref string)(*Ballot, error){
+	if b, ok := cache[ref]; ok {
+		return b, nil
+	}
+
 	obj, err := shell.ObjectGet(ref)
 
 	if err != nil {
@@ -48,15 +52,14 @@ func GetIpfsBallot(ref string)(*Ballot, error){
 		return nil, err
 	}
 
-	logrus.Infof("group size: %d", len(metadata.BallotGroups))
 	res := &Ballot{
 		Title: metadata.Title,
 		Decisions: []Decision{},
 	}
 	// squash into flat array per ballot
 	for _, group := range metadata.BallotGroups {
-
 		res.Decisions = append(res.Decisions, group.Decisions...)
 	}
+	cache[ref] = res
 	return res, nil
 }

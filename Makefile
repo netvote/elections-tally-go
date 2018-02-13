@@ -1,4 +1,4 @@
-.PHONY: contracts, protocol
+.PHONY: contracts protocol
 
 contracts:
 	npm install
@@ -7,7 +7,9 @@ contracts:
 	$(call GenerateBinding,BasicElection)
 	$(call GenerateBinding,TieredElection)
 	$(call GenerateBinding,TieredBallot)
-	$(call GenerateBinding,TieredPool)
+	$(call GenerateBinding,BasePool)
+	$(call GenerateBinding,BaseBallot)
+	$(call GenerateBinding,BaseElection)
 	rm -rf abi
 
 define GenerateBinding
