@@ -18,8 +18,13 @@ func main() {
 
 	address := flag.String("address", "", "Ethereum address of election")
 	testNet := flag.Bool("testnet", false, "Use ropsten network")
+	debug := flag.Bool("debug", false, "Show more detail")
 
 	flag.Parse()
+
+	if *debug {
+		log.SetLevel(log.DebugLevel)
+	}
 
 
 	network := "mainnet"
@@ -87,17 +92,9 @@ func main() {
 
 		result := tally.NewTallyResults()
 		go func() {
-			first := true
 			for vote := range tallyChan {
-				go func() {
-					defer wg.Done()
-					if first {
-						first = false
-						result = vote
-					}else{
-						result.MergeSum(vote)
-					}
-				}()
+				result.MergeSum(vote)
+				wg.Done()
 			}
 		}()
 

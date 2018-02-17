@@ -17,6 +17,8 @@ make build
 Usage of ./main:
   -address string
     	Ethereum address of election
+  -debug
+    	Show detailed logs   	
   -testnet
     	Use ropsten network
 ```

@@ -3,7 +3,7 @@ package tally
 import (
 	"github.com/netvote/elections-tally-go/storage"
 	"encoding/json"
-	"sync"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -24,20 +24,18 @@ type BallotResult struct {
 
 type TallyResults struct {
 	// address to BallotResult
-	mux *sync.Mutex
 	BallotResults map[string]BallotResult `json:"ballotResults"`
 }
 
 func NewTallyResults() TallyResults{
 	return TallyResults{
-		mux: &sync.Mutex{},
+		BallotResults: make(map[string]BallotResult),
 	}
 }
 
 // convert to channel approach?
 func (r TallyResults) MergeSum(vote TallyResults){
-	r.mux.Lock()
-	defer r.mux.Unlock()
+	logrus.Debugf("merging %s to %s", vote.Json(), r.Json())
 	for addr, br := range vote.BallotResults {
 		ballotResult := r.BallotResults[addr]
 		ballotResult.TotalVotes += 1

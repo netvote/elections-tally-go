@@ -20,9 +20,8 @@ var (
 
 func voteToResults(ballotAddress []string, ballotMetadata []*storage.Ballot, ballotGroups map[string][]string, vote protocol.Vote)(TallyResults){
 
-	result := TallyResults{
-		BallotResults:make(map[string]BallotResult),
-	}
+	result := NewTallyResults()
+
 	for i:=0; i<len(vote.BallotVotes); i++ {
 		address := ballotAddress[i]
 		ballotVote := vote.BallotVotes[i]
@@ -81,7 +80,6 @@ func TallyPool(poolAddress string, decoder *decoder.Decoder, client *ethclient.C
 	groups := make(map[string][]string)
 
 	result := NewTallyResults()
-	result.BallotResults = make(map[string]BallotResult)
 
 	for i:=int64(0); i<ballotCount.Int64(); i++ {
 		idx := big.NewInt(i)
@@ -154,7 +152,7 @@ func TallyPool(poolAddress string, decoder *decoder.Decoder, client *ethclient.C
 		return empty, err
 	}
 
-	tallyChan := make(chan TallyResults, 100)
+	tallyChan := make(chan TallyResults, 10)
 	//defer close(tallyChan)
 	var wg sync.WaitGroup
 	wg.Add(int(voteCount.Int64()))
@@ -173,13 +171,10 @@ func TallyPool(poolAddress string, decoder *decoder.Decoder, client *ethclient.C
 
 	go func() {
 		for vote := range tallyChan {
-			go func() {
-				defer wg.Done()
-				result.MergeSum(vote)
-			}()
+			result.MergeSum(vote)
+			wg.Done()
 		}
 	}()
-
 
 	wg.Wait()
 	close(tallyChan)
