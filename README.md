@@ -54,3 +54,13 @@ Usage of ./main:
   }
 }
 ```
+
+Contributing
+-------------------
+
+### Contribution Process
+1. Fork repo
+2. Make desired changes
+3. Submit PR (Reference Issue #)
+4. Reviewer will review
+5. Reviewer Squash + Merges PR
