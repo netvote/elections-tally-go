@@ -11,6 +11,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"flag"
 	"sync"
+	"fmt"
 )
 
 func main() {
@@ -63,7 +64,7 @@ func main() {
 		result, err := tally.TallyPool(*address, d, conn)
 		noError("error tallying pool", err)
 
-		log.Infof("%s", result.Json())
+		fmt.Println(result.Json())
 
 	case "TIERED":
 		tiered, err := contracts.NewTieredElection(common.HexToAddress(*address), conn)
@@ -84,7 +85,7 @@ func main() {
 			}()
 		}
 
-		var result tally.TallyResults
+		result := tally.NewTallyResults()
 		go func() {
 			first := true
 			for vote := range tallyChan {
@@ -102,10 +103,9 @@ func main() {
 
 		wg.Wait()
 		close(tallyChan)
-		log.Infof("%s", result.Json())
+		fmt.Println(result.Json())
 
 
-		log.Info("Tiered")
 	default:
 		log.Errorf("Unrecognized election type: %s", electionType)
 		os.Exit(1)

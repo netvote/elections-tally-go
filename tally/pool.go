@@ -80,9 +80,8 @@ func TallyPool(poolAddress string, decoder *decoder.Decoder, client *ethclient.C
 	metadata := make([]*storage.Ballot, 0)
 	groups := make(map[string][]string)
 
-	result := TallyResults{
-		BallotResults:make(map[string]BallotResult),
-	}
+	result := NewTallyResults()
+	result.BallotResults = make(map[string]BallotResult)
 
 	for i:=int64(0); i<ballotCount.Int64(); i++ {
 		idx := big.NewInt(i)
@@ -137,7 +136,6 @@ func TallyPool(poolAddress string, decoder *decoder.Decoder, client *ethclient.C
 		}
 
 		br := BallotResult{
-			Metadata: ballotMetadata,
 			GroupResults: make(map[string]GroupResult),
 		}
 		for _, g := range groups[ballot.Hex()] {

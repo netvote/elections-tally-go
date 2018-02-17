@@ -1,8 +1,9 @@
 # elections-tally-go
-This tallies elections using goroutines in an effort to be reasonably quick
+This tallies elections using goroutines.  This is faster than the node library (for large elections). 
 
 ## Build
 ```
+make contracts
 make build
 ```
 
@@ -22,5 +23,32 @@ Usage of ./main:
 
 ## Ouput
 ```
-INFO[0001] {"BallotResults":{"0x6007CB06f4e91dd5fad6d639ff2a3caAF12dd4B3":{"TotalVotes":0,"Metadata":{"groupTitle":"2020 Election","ballotSections":[{"sectionTitle":"Governor","ballotItems":[{"itemTitle":"John Smith"},{"itemTitle":"Sally Gutierrez"},{"itemTitle":"Tyrone Williams"}]},{"sectionTitle":"Proposition 33","ballotItems":[{"itemTitle":"Yes"},{"itemTitle":"No"}]},{"sectionTitle":"Tax Commissioner","ballotItems":[{"itemTitle":"Doug Hall"},{"itemTitle":"Emily Washington"}]}]},"GroupResults":{"ALL":{"TotalVotes":0,"Decisions":[{"John Smith":3,"Sally Gutierrez":0,"Tyrone Williams":0},{"No":3,"Yes":0},{"Doug Hall":0,"Emily Washington":0,"WRITEIN-JOHN DOE":3}]}}}}}
+{
+  "ballotResults": {
+    "0x6007CB06f4e91dd5fad6d639ff2a3caAF12dd4B3": {
+      "totalVotes": 4,
+      "groupVotes": {
+        "ALL": {
+          "totalVotes": 4,
+          "decisions": [
+            {
+              "John Smith": 4,
+              "Sally Gutierrez": 0,
+              "Tyrone Williams": 0
+            },
+            {
+              "No": 4,
+              "Yes": 0
+            },
+            {
+              "Doug Hall": 0,
+              "Emily Washington": 0,
+              "WRITEIN-JOHN DOE": 4
+            }
+          ]
+        }
+      }
+    }
+  }
+}
 ```
