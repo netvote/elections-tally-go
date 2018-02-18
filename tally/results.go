@@ -4,6 +4,7 @@ import (
 	"github.com/netvote/elections-tally-go/storage"
 	"encoding/json"
 	"github.com/sirupsen/logrus"
+	"sync"
 )
 
 const (
@@ -24,17 +25,21 @@ type BallotResult struct {
 
 type TallyResults struct {
 	// address to BallotResult
+	mux *sync.Mutex
 	BallotResults map[string]BallotResult `json:"ballotResults"`
 }
 
 func NewTallyResults() TallyResults{
 	return TallyResults{
 		BallotResults: make(map[string]BallotResult),
+		mux: &sync.Mutex{},
 	}
 }
 
 // convert to channel approach?
 func (r TallyResults) MergeSum(vote TallyResults){
+	r.mux.Lock()
+	defer r.mux.Unlock()
 	logrus.Debugf("merging %s to %s", vote.Json(), r.Json())
 	for addr, br := range vote.BallotResults {
 		ballotResult := r.BallotResults[addr]
