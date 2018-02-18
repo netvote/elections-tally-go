@@ -19,7 +19,7 @@ type BallotResult struct {
 	TotalVotes int `json:"totalVotes"`
 	Metadata *storage.Ballot `json:"metadata,omitempty"`
 	// group to BallotResult
-	GroupResults map[string]GroupResult `json:"groupVotes"`
+	GroupResults map[string]GroupResult `json:"results"`
 }
 
 type TallyResults struct {
