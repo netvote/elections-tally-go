@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "system-test": "./pre-test.sh && cd elections-solidity && run-with-testrpc -l 20000000 'truffle --network testing migrate && truffle exec --network testing ../test-scripts/run-basic-election.js | grep 0x > election.address && cd ../ && go test -tags=system -v ./...'"
   },
   "author": "steven@netvote.io",
   "license": "GPL-3.0",
   "dependencies": {
     "@netvote/elections-solidity": "^1.0.4"
+  },
+  "devDependencies": {
+    "run-with-testrpc": "^0.3.0",
+    "truffle": "^4.0.6"
   }
 }

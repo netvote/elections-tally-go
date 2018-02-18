@@ -11,40 +11,20 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"flag"
 	"sync"
+	"errors"
 	"fmt"
 )
 
-func main() {
-
-	address := flag.String("address", "", "Ethereum address of election")
-	testNet := flag.Bool("testnet", false, "Use ropsten network")
-	debug := flag.Bool("debug", false, "Show more detail")
-
-	flag.Parse()
-
-	if *debug {
-		log.SetLevel(log.DebugLevel)
-	}
-
-
-	network := "mainnet"
-	if *testNet {
-		network = "ropsten"
-	}
-
-	if *address == "" {
-		log.Errorf("-address (of election) is required")
-		os.Exit(1)
-	}
-
+func doTally(address string, provider string) (tally.TallyResults, error){
 	// get encryption key
-	conn, err := ethclient.Dial("https://"+network+".infura.io")
+	conn, err := ethclient.Dial(provider)
 	noError("error getting ethclient", err)
 
-	election, err := contracts.NewBaseElection(common.HexToAddress(*address), conn)
+	election, err := contracts.NewBaseElection(common.HexToAddress(address), conn)
 	noError("error getting election", err)
 
 	key, err := election.PrivateKey(nil)
+	log.Info("address="+address)
 	noError("error getting decryption key", err)
 
 	if key == "" {
@@ -66,13 +46,13 @@ func main() {
 	case "BASIC":
 		noError("error getting election", err)
 
-		result, err := tally.TallyPool(*address, d, conn)
+		result, err := tally.TallyPool(address, d, conn)
 		noError("error tallying pool", err)
-
-		fmt.Println(result.Json())
+		log.Info("done doing tally: "+result.Json())
+		return result, nil
 
 	case "TIERED":
-		tiered, err := contracts.NewTieredElection(common.HexToAddress(*address), conn)
+		tiered, err := contracts.NewTieredElection(common.HexToAddress(address), conn)
 		noError("error getting election", err)
 
 		poolCnt, err := tiered.GetPoolCount(nil)
@@ -84,7 +64,7 @@ func main() {
 
 		for i := int64(0); i<poolCnt.Int64(); i++ {
 			go func() {
-				result, err := tally.TallyPool(*address, d, conn)
+				result, err := tally.TallyPool(address, d, conn)
 				noError("error tallying pool", err)
 				tallyChan <- result
 			}()
@@ -100,14 +80,41 @@ func main() {
 
 		wg.Wait()
 		close(tallyChan)
-		fmt.Println(result.Json())
+		return result, nil
 
 
 	default:
 		log.Errorf("Unrecognized election type: %s", electionType)
 		os.Exit(1)
 	}
+	return tally.TallyResults{}, errors.New("invalid condition")
+}
 
+func main() {
+	address := flag.String("address", "", "Ethereum address of election")
+	testNet := flag.Bool("testnet", false, "Use ropsten network")
+	debug := flag.Bool("debug", false, "Show more detail")
+
+	flag.Parse()
+
+	if *debug {
+		log.SetLevel(log.DebugLevel)
+	}
+
+	network := "mainnet"
+	if *testNet {
+		network = "ropsten"
+	}
+
+	if *address == "" {
+		log.Errorf("-address (of election) is required")
+		os.Exit(1)
+	}
+	provider := "https://"+network+".infura.io"
+
+	res, err := doTally(*address, provider)
+	noError("error during tally", err)
+	fmt.Println(res.Json())
 }
 
 func noError(message string, err error){
