@@ -79,5 +79,8 @@ func (d *Decoder) DecodeVote(payload string) (protocol.Vote, error){
 
 func trimPadding(msg []byte)([]byte){
 	padding := len(msg) - int(msg[len(msg)-1])
+	if padding < 0 {
+		return msg
+	}
 	return msg[:padding]
 }

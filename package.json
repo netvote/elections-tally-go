@@ -9,7 +9,7 @@
   "author": "steven@netvote.io",
   "license": "GPL-3.0",
   "dependencies": {
-    "@netvote/elections-solidity": "^1.0.4"
+    "@netvote/elections-solidity": "^1.0.15"
   },
   "devDependencies": {
     "run-with-testrpc": "^0.3.0",

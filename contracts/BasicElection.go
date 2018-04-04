@@ -14,7 +14,7 @@ import (
 )
 
 // BasicElectionABI is the input ABI used to generate the binding from.
-const BasicElectionABI = "[{\"constant\":false,\"inputs\":[],\"name\":\"activate\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"gateway\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"ballotExists\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isAdmin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"electionPhase\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"votes\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"abort\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"createdBy\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"entry\",\"type\":\"bytes32\"}],\"name\":\"addAuthorized\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"close\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"electionType\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"privateKey\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"election\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"voteId\",\"type\":\"bytes32\"},{\"name\":\"vote\",\"type\":\"string\"},{\"name\":\"passphrase\",\"type\":\"string\"}],\"name\":\"castVote\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"removeSelf\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"entry\",\"type\":\"bytes32\"}],\"name\":\"isAuthorized\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"publicKey\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"key\",\"type\":\"string\"}],\"name\":\"setPublicKey\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"entry\",\"type\":\"bytes32\"}],\"name\":\"removeAuthorized\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getVoteAt\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isLocked\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"unlock\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getBallotCount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"metadataLocation\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"allowVoteUpdates\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isClosed\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"removeBallot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"voteId\",\"type\":\"bytes32\"},{\"name\":\"vote\",\"type\":\"string\"},{\"name\":\"passphrase\",\"type\":\"string\"}],\"name\":\"updateVote\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"getBallotIndex\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"deductVote\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"key\",\"type\":\"string\"}],\"name\":\"setPrivateKey\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getVoteCount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"checkConfig\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"lock\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"addBallot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getBallot\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"hashedUserId\",\"type\":\"bytes32\"},{\"name\":\"allowanceAddress\",\"type\":\"address\"},{\"name\":\"ownerOfAllowance\",\"type\":\"address\"},{\"name\":\"allowUpdates\",\"type\":\"bool\"},{\"name\":\"revealerAddress\",\"type\":\"address\"},{\"name\":\"location\",\"type\":\"string\"},{\"name\":\"gatewayAddress\",\"type\":\"address\"},{\"name\":\"autoActivate\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"KeyReleased\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"voteId\",\"type\":\"bytes32\"}],\"name\":\"Vote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"voteId\",\"type\":\"bytes32\"}],\"name\":\"UpdateVote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Closed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Activated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Aborted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Locked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Unlocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"}]"
+const BasicElectionABI = "[{\"constant\":false,\"inputs\":[],\"name\":\"activate\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"gateway\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"ballotExists\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"voteToken\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"removeAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"electionStartTime\",\"type\":\"uint256\"},{\"name\":\"electionEndTime\",\"type\":\"uint256\"}],\"name\":\"setTimes\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"isAdmin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"electionPhase\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"votes\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"endTime\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"abort\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"createdBy\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"voteId\",\"type\":\"bytes32\"},{\"name\":\"vote\",\"type\":\"string\"},{\"name\":\"passphrase\",\"type\":\"string\"},{\"name\":\"jti\",\"type\":\"bytes32\"}],\"name\":\"castVote\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"entry\",\"type\":\"bytes32\"}],\"name\":\"addAuthorized\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"close\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"acct\",\"type\":\"address\"}],\"name\":\"setVoteOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"electionType\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"privateKey\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"election\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"removeSelf\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"entry\",\"type\":\"bytes32\"}],\"name\":\"isAuthorized\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"publicKey\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"key\",\"type\":\"string\"}],\"name\":\"setPublicKey\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"addAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"entry\",\"type\":\"bytes32\"}],\"name\":\"removeAuthorized\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"startTime\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"withdrawVotes\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getVoteAt\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isLocked\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"unlock\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getBallotCount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"metadataLocation\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"allowVoteUpdates\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isClosed\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"voteId\",\"type\":\"bytes32\"},{\"name\":\"vote\",\"type\":\"string\"},{\"name\":\"passphrase\",\"type\":\"string\"},{\"name\":\"jti\",\"type\":\"bytes32\"}],\"name\":\"updateVote\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"removeBallot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"getBallotIndex\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"deductVote\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"key\",\"type\":\"string\"}],\"name\":\"setPrivateKey\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getVoteCount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdrawAllVotes\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"checkConfig\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"lock\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"b\",\"type\":\"address\"}],\"name\":\"addBallot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getBallot\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"hashedUserId\",\"type\":\"bytes32\"},{\"name\":\"allowanceAddress\",\"type\":\"address\"},{\"name\":\"ownerOfAllowance\",\"type\":\"address\"},{\"name\":\"allowUpdates\",\"type\":\"bool\"},{\"name\":\"revealerAddress\",\"type\":\"address\"},{\"name\":\"location\",\"type\":\"string\"},{\"name\":\"gatewayAddress\",\"type\":\"address\"},{\"name\":\"autoActivate\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"KeyReleased\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"voteId\",\"type\":\"bytes32\"}],\"name\":\"Vote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"voteId\",\"type\":\"bytes32\"}],\"name\":\"UpdateVote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Closed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Activated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Aborted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Locked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Unlocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"}]"
 
 // BasicElection is an auto generated Go binding around an Ethereum contract.
 type BasicElection struct {
@@ -323,6 +323,32 @@ func (_BasicElection *BasicElectionSession) ElectionType() (string, error) {
 // Solidity: function electionType() constant returns(string)
 func (_BasicElection *BasicElectionCallerSession) ElectionType() (string, error) {
 	return _BasicElection.Contract.ElectionType(&_BasicElection.CallOpts)
+}
+
+// EndTime is a free data retrieval call binding the contract method 0x3197cbb6.
+//
+// Solidity: function endTime() constant returns(uint256)
+func (_BasicElection *BasicElectionCaller) EndTime(opts *bind.CallOpts) (*big.Int, error) {
+	var (
+		ret0 = new(*big.Int)
+	)
+	out := ret0
+	err := _BasicElection.contract.Call(opts, out, "endTime")
+	return *ret0, err
+}
+
+// EndTime is a free data retrieval call binding the contract method 0x3197cbb6.
+//
+// Solidity: function endTime() constant returns(uint256)
+func (_BasicElection *BasicElectionSession) EndTime() (*big.Int, error) {
+	return _BasicElection.Contract.EndTime(&_BasicElection.CallOpts)
+}
+
+// EndTime is a free data retrieval call binding the contract method 0x3197cbb6.
+//
+// Solidity: function endTime() constant returns(uint256)
+func (_BasicElection *BasicElectionCallerSession) EndTime() (*big.Int, error) {
+	return _BasicElection.Contract.EndTime(&_BasicElection.CallOpts)
 }
 
 // Gateway is a free data retrieval call binding the contract method 0x116191b6.
@@ -689,6 +715,58 @@ func (_BasicElection *BasicElectionCallerSession) PublicKey() (string, error) {
 	return _BasicElection.Contract.PublicKey(&_BasicElection.CallOpts)
 }
 
+// StartTime is a free data retrieval call binding the contract method 0x78e97925.
+//
+// Solidity: function startTime() constant returns(uint256)
+func (_BasicElection *BasicElectionCaller) StartTime(opts *bind.CallOpts) (*big.Int, error) {
+	var (
+		ret0 = new(*big.Int)
+	)
+	out := ret0
+	err := _BasicElection.contract.Call(opts, out, "startTime")
+	return *ret0, err
+}
+
+// StartTime is a free data retrieval call binding the contract method 0x78e97925.
+//
+// Solidity: function startTime() constant returns(uint256)
+func (_BasicElection *BasicElectionSession) StartTime() (*big.Int, error) {
+	return _BasicElection.Contract.StartTime(&_BasicElection.CallOpts)
+}
+
+// StartTime is a free data retrieval call binding the contract method 0x78e97925.
+//
+// Solidity: function startTime() constant returns(uint256)
+func (_BasicElection *BasicElectionCallerSession) StartTime() (*big.Int, error) {
+	return _BasicElection.Contract.StartTime(&_BasicElection.CallOpts)
+}
+
+// VoteToken is a free data retrieval call binding the contract method 0x160d66ae.
+//
+// Solidity: function voteToken() constant returns(address)
+func (_BasicElection *BasicElectionCaller) VoteToken(opts *bind.CallOpts) (common.Address, error) {
+	var (
+		ret0 = new(common.Address)
+	)
+	out := ret0
+	err := _BasicElection.contract.Call(opts, out, "voteToken")
+	return *ret0, err
+}
+
+// VoteToken is a free data retrieval call binding the contract method 0x160d66ae.
+//
+// Solidity: function voteToken() constant returns(address)
+func (_BasicElection *BasicElectionSession) VoteToken() (common.Address, error) {
+	return _BasicElection.Contract.VoteToken(&_BasicElection.CallOpts)
+}
+
+// VoteToken is a free data retrieval call binding the contract method 0x160d66ae.
+//
+// Solidity: function voteToken() constant returns(address)
+func (_BasicElection *BasicElectionCallerSession) VoteToken() (common.Address, error) {
+	return _BasicElection.Contract.VoteToken(&_BasicElection.CallOpts)
+}
+
 // Votes is a free data retrieval call binding the contract method 0x2b38cd96.
 //
 // Solidity: function votes( bytes32) constant returns(string)
@@ -820,25 +898,25 @@ func (_BasicElection *BasicElectionTransactorSession) AddBallot(b common.Address
 	return _BasicElection.Contract.AddBallot(&_BasicElection.TransactOpts, b)
 }
 
-// CastVote is a paid mutator transaction binding the contract method 0x552c3a02.
+// CastVote is a paid mutator transaction binding the contract method 0x4126ebe2.
 //
-// Solidity: function castVote(voteId bytes32, vote string, passphrase string) returns()
-func (_BasicElection *BasicElectionTransactor) CastVote(opts *bind.TransactOpts, voteId [32]byte, vote string, passphrase string) (*types.Transaction, error) {
-	return _BasicElection.contract.Transact(opts, "castVote", voteId, vote, passphrase)
+// Solidity: function castVote(voteId bytes32, vote string, passphrase string, jti bytes32) returns()
+func (_BasicElection *BasicElectionTransactor) CastVote(opts *bind.TransactOpts, voteId [32]byte, vote string, passphrase string, jti [32]byte) (*types.Transaction, error) {
+	return _BasicElection.contract.Transact(opts, "castVote", voteId, vote, passphrase, jti)
 }
 
-// CastVote is a paid mutator transaction binding the contract method 0x552c3a02.
+// CastVote is a paid mutator transaction binding the contract method 0x4126ebe2.
 //
-// Solidity: function castVote(voteId bytes32, vote string, passphrase string) returns()
-func (_BasicElection *BasicElectionSession) CastVote(voteId [32]byte, vote string, passphrase string) (*types.Transaction, error) {
-	return _BasicElection.Contract.CastVote(&_BasicElection.TransactOpts, voteId, vote, passphrase)
+// Solidity: function castVote(voteId bytes32, vote string, passphrase string, jti bytes32) returns()
+func (_BasicElection *BasicElectionSession) CastVote(voteId [32]byte, vote string, passphrase string, jti [32]byte) (*types.Transaction, error) {
+	return _BasicElection.Contract.CastVote(&_BasicElection.TransactOpts, voteId, vote, passphrase, jti)
 }
 
-// CastVote is a paid mutator transaction binding the contract method 0x552c3a02.
+// CastVote is a paid mutator transaction binding the contract method 0x4126ebe2.
 //
-// Solidity: function castVote(voteId bytes32, vote string, passphrase string) returns()
-func (_BasicElection *BasicElectionTransactorSession) CastVote(voteId [32]byte, vote string, passphrase string) (*types.Transaction, error) {
-	return _BasicElection.Contract.CastVote(&_BasicElection.TransactOpts, voteId, vote, passphrase)
+// Solidity: function castVote(voteId bytes32, vote string, passphrase string, jti bytes32) returns()
+func (_BasicElection *BasicElectionTransactorSession) CastVote(voteId [32]byte, vote string, passphrase string, jti [32]byte) (*types.Transaction, error) {
+	return _BasicElection.Contract.CastVote(&_BasicElection.TransactOpts, voteId, vote, passphrase, jti)
 }
 
 // Close is a paid mutator transaction binding the contract method 0x43d726d6.
@@ -1030,6 +1108,48 @@ func (_BasicElection *BasicElectionTransactorSession) SetPublicKey(key string) (
 	return _BasicElection.Contract.SetPublicKey(&_BasicElection.TransactOpts, key)
 }
 
+// SetTimes is a paid mutator transaction binding the contract method 0x22434836.
+//
+// Solidity: function setTimes(electionStartTime uint256, electionEndTime uint256) returns()
+func (_BasicElection *BasicElectionTransactor) SetTimes(opts *bind.TransactOpts, electionStartTime *big.Int, electionEndTime *big.Int) (*types.Transaction, error) {
+	return _BasicElection.contract.Transact(opts, "setTimes", electionStartTime, electionEndTime)
+}
+
+// SetTimes is a paid mutator transaction binding the contract method 0x22434836.
+//
+// Solidity: function setTimes(electionStartTime uint256, electionEndTime uint256) returns()
+func (_BasicElection *BasicElectionSession) SetTimes(electionStartTime *big.Int, electionEndTime *big.Int) (*types.Transaction, error) {
+	return _BasicElection.Contract.SetTimes(&_BasicElection.TransactOpts, electionStartTime, electionEndTime)
+}
+
+// SetTimes is a paid mutator transaction binding the contract method 0x22434836.
+//
+// Solidity: function setTimes(electionStartTime uint256, electionEndTime uint256) returns()
+func (_BasicElection *BasicElectionTransactorSession) SetTimes(electionStartTime *big.Int, electionEndTime *big.Int) (*types.Transaction, error) {
+	return _BasicElection.Contract.SetTimes(&_BasicElection.TransactOpts, electionStartTime, electionEndTime)
+}
+
+// SetVoteOwner is a paid mutator transaction binding the contract method 0x47beabd6.
+//
+// Solidity: function setVoteOwner(acct address) returns()
+func (_BasicElection *BasicElectionTransactor) SetVoteOwner(opts *bind.TransactOpts, acct common.Address) (*types.Transaction, error) {
+	return _BasicElection.contract.Transact(opts, "setVoteOwner", acct)
+}
+
+// SetVoteOwner is a paid mutator transaction binding the contract method 0x47beabd6.
+//
+// Solidity: function setVoteOwner(acct address) returns()
+func (_BasicElection *BasicElectionSession) SetVoteOwner(acct common.Address) (*types.Transaction, error) {
+	return _BasicElection.Contract.SetVoteOwner(&_BasicElection.TransactOpts, acct)
+}
+
+// SetVoteOwner is a paid mutator transaction binding the contract method 0x47beabd6.
+//
+// Solidity: function setVoteOwner(acct address) returns()
+func (_BasicElection *BasicElectionTransactorSession) SetVoteOwner(acct common.Address) (*types.Transaction, error) {
+	return _BasicElection.Contract.SetVoteOwner(&_BasicElection.TransactOpts, acct)
+}
+
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(newOwner address) returns()
@@ -1072,23 +1192,65 @@ func (_BasicElection *BasicElectionTransactorSession) Unlock() (*types.Transacti
 	return _BasicElection.Contract.Unlock(&_BasicElection.TransactOpts)
 }
 
-// UpdateVote is a paid mutator transaction binding the contract method 0xd8b5708c.
+// UpdateVote is a paid mutator transaction binding the contract method 0xd6807a5c.
 //
-// Solidity: function updateVote(voteId bytes32, vote string, passphrase string) returns()
-func (_BasicElection *BasicElectionTransactor) UpdateVote(opts *bind.TransactOpts, voteId [32]byte, vote string, passphrase string) (*types.Transaction, error) {
-	return _BasicElection.contract.Transact(opts, "updateVote", voteId, vote, passphrase)
+// Solidity: function updateVote(voteId bytes32, vote string, passphrase string, jti bytes32) returns()
+func (_BasicElection *BasicElectionTransactor) UpdateVote(opts *bind.TransactOpts, voteId [32]byte, vote string, passphrase string, jti [32]byte) (*types.Transaction, error) {
+	return _BasicElection.contract.Transact(opts, "updateVote", voteId, vote, passphrase, jti)
 }
 
-// UpdateVote is a paid mutator transaction binding the contract method 0xd8b5708c.
+// UpdateVote is a paid mutator transaction binding the contract method 0xd6807a5c.
 //
-// Solidity: function updateVote(voteId bytes32, vote string, passphrase string) returns()
-func (_BasicElection *BasicElectionSession) UpdateVote(voteId [32]byte, vote string, passphrase string) (*types.Transaction, error) {
-	return _BasicElection.Contract.UpdateVote(&_BasicElection.TransactOpts, voteId, vote, passphrase)
+// Solidity: function updateVote(voteId bytes32, vote string, passphrase string, jti bytes32) returns()
+func (_BasicElection *BasicElectionSession) UpdateVote(voteId [32]byte, vote string, passphrase string, jti [32]byte) (*types.Transaction, error) {
+	return _BasicElection.Contract.UpdateVote(&_BasicElection.TransactOpts, voteId, vote, passphrase, jti)
 }
 
-// UpdateVote is a paid mutator transaction binding the contract method 0xd8b5708c.
+// UpdateVote is a paid mutator transaction binding the contract method 0xd6807a5c.
 //
-// Solidity: function updateVote(voteId bytes32, vote string, passphrase string) returns()
-func (_BasicElection *BasicElectionTransactorSession) UpdateVote(voteId [32]byte, vote string, passphrase string) (*types.Transaction, error) {
-	return _BasicElection.Contract.UpdateVote(&_BasicElection.TransactOpts, voteId, vote, passphrase)
+// Solidity: function updateVote(voteId bytes32, vote string, passphrase string, jti bytes32) returns()
+func (_BasicElection *BasicElectionTransactorSession) UpdateVote(voteId [32]byte, vote string, passphrase string, jti [32]byte) (*types.Transaction, error) {
+	return _BasicElection.Contract.UpdateVote(&_BasicElection.TransactOpts, voteId, vote, passphrase, jti)
+}
+
+// WithdrawAllVotes is a paid mutator transaction binding the contract method 0xee51d4e1.
+//
+// Solidity: function withdrawAllVotes() returns()
+func (_BasicElection *BasicElectionTransactor) WithdrawAllVotes(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _BasicElection.contract.Transact(opts, "withdrawAllVotes")
+}
+
+// WithdrawAllVotes is a paid mutator transaction binding the contract method 0xee51d4e1.
+//
+// Solidity: function withdrawAllVotes() returns()
+func (_BasicElection *BasicElectionSession) WithdrawAllVotes() (*types.Transaction, error) {
+	return _BasicElection.Contract.WithdrawAllVotes(&_BasicElection.TransactOpts)
+}
+
+// WithdrawAllVotes is a paid mutator transaction binding the contract method 0xee51d4e1.
+//
+// Solidity: function withdrawAllVotes() returns()
+func (_BasicElection *BasicElectionTransactorSession) WithdrawAllVotes() (*types.Transaction, error) {
+	return _BasicElection.Contract.WithdrawAllVotes(&_BasicElection.TransactOpts)
+}
+
+// WithdrawVotes is a paid mutator transaction binding the contract method 0x961edb25.
+//
+// Solidity: function withdrawVotes(value uint256) returns()
+func (_BasicElection *BasicElectionTransactor) WithdrawVotes(opts *bind.TransactOpts, value *big.Int) (*types.Transaction, error) {
+	return _BasicElection.contract.Transact(opts, "withdrawVotes", value)
+}
+
+// WithdrawVotes is a paid mutator transaction binding the contract method 0x961edb25.
+//
+// Solidity: function withdrawVotes(value uint256) returns()
+func (_BasicElection *BasicElectionSession) WithdrawVotes(value *big.Int) (*types.Transaction, error) {
+	return _BasicElection.Contract.WithdrawVotes(&_BasicElection.TransactOpts, value)
+}
+
+// WithdrawVotes is a paid mutator transaction binding the contract method 0x961edb25.
+//
+// Solidity: function withdrawVotes(value uint256) returns()
+func (_BasicElection *BasicElectionTransactorSession) WithdrawVotes(value *big.Int) (*types.Transaction, error) {
+	return _BasicElection.Contract.WithdrawVotes(&_BasicElection.TransactOpts, value)
 }
